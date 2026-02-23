@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Esto fuerza a Tailwind a usar la clase .dark para activar el modo oscuro */
+@variant dark (&:where(.dark, .dark *));
+
+/* Estilos globales personalizados */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  /* El color de fondo ya lo estamos manejando con Tailwind (bg-gray-50) en el HTML, pero puedes sobreescribirlo aquí */
+}

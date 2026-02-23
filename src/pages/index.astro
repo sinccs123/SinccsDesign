@@ -1,0 +1,26 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/style.css';
+---
+
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>SinccsDesign</title>
+    <script is:inline>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">  
+    <Header />
+    <main class="relative top-24 px-8">
+        <h1 class="text-4xl font-bold">Página de Inicio</h1>
+        <p class="mt-4">Este es el contenido de la página principal donde podrás ver el header fijo funcionando.</p>
+    </main>
+</body> 
+</html>

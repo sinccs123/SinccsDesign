@@ -5,18 +5,20 @@ const { pathname } = Astro.url;
 
 const navLinks = [
     { name: 'Sobre mi', href: '/' },
-    { name: 'Porfolio', href: '#' },
+    { name: 'Porfolio', href: '/portfolio' }, // Cambiado a una ruta real para demostración
 ];
 ---
 <header class="fixed top-0 left-0 w-full bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm shadow-sm z-50 transition-colors duration-300">
-    <nav class="mx-auto flex max-w-8xl items-center justify-between p-4 lg:px-8">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div class="flex items-center gap-4">
             <a href="/" class="-m-1.5 p-1.5">
-                <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1771861710/sinccs_bk_tou81s.png" alt="SinccsDesign" class="h-10 w-auto dark:hidden" />
+                <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1771861710/sinccs_col_peyzj4.png" alt="SinccsDesign" class="h-10 w-auto dark:hidden" />
                 <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1771861710/sinccs_col_peyzj4.png" alt="SinccsDesign" class="h-10 w-auto hidden dark:block" />
             </a>
         </div>
-        <div class="flex items-center gap-x-6">
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-x-6">
             <ul class="flex gap-x-6">
                 {navLinks.map(link => (
                     <li>
@@ -32,5 +34,75 @@ const navLinks = [
             </ul>
             <BotonReact client:load />
         </div>
+
+        <!-- Mobile Menu Button (Hamburger) -->
+        <div class="flex md:hidden">
+            <button id="mobile-menu-button" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300">
+                <span class="sr-only">Open main menu</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
     </nav>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" class="md:hidden hidden" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 z-10"></div>
+        <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-slate-900 dark:ring-gray-100/10">
+            <div class="flex items-center justify-between">
+                <a href="/" class="-m-1.5 p-1.5">
+                    <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1771861710/sinccs_col_peyzj4.png" alt="SinccsDesign" class="h-10 w-auto dark:hidden" />
+                    <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1771861710/sinccs_wh_jzcc2o.png" alt="SinccsDesign" class="h-10 w-auto hidden dark:block" />
+                </a>
+                <button id="close-mobile-menu-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300">
+                    <span class="sr-only">Close menu</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mt-6 flow-root">
+                <div class="-my-6 divide-y divide-gray-500/10 dark:divide-gray-400/10">
+                    <div class="space-y-2 py-6">
+                        {navLinks.map(link => (
+                            <a
+                                href={link.href}
+                                class:list={[
+                                    "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-slate-700",
+                                    { 'border-l-4 border-yellow-400': pathname === link.href } // Usar border-l para el estado activo en móvil
+                                ]}
+                            >{link.name}</a>
+                        ))}
+                    </div>
+                    <div class="py-6 flex justify-center"> {/* Centrar el botón de modo oscuro en el menú móvil */}
+                        <BotonReact client:load />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
+
+<script is:inline>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+
+    if (mobileMenuButton && mobileMenuPanel && closeMobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenuPanel.classList.remove('hidden');
+        });
+
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenuPanel.classList.add('hidden');
+        });
+
+        // Cerrar el menú cuando se hace clic en un enlace (opcional, pero mejora la UX)
+        mobileMenuPanel.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuPanel.classList.add('hidden');
+            });
+        });
+    }
+</script>

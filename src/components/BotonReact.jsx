@@ -1,17 +1,53 @@
 import React, { useState, useEffect } from 'react';
 
 export default function BotonReact() {
-  // Inicializamos el estado leyendo si la clase 'dark' ya existe para evitar parpadeos.
-  const [isDarkMode, setIsDarkMode] = useState(
-    () => typeof window !== 'undefined' && document.documentElement.classList.contains('dark')
-  );
+  const getThemeState = () => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      return true;
+    }
+    if (savedTheme === 'light') {
+      return false;
+    }
+
+    return (
+      document.documentElement.classList.contains('dark') ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    );
+  };
+
+  const [isDarkMode, setIsDarkMode] = useState(getThemeState);
 
   // Función para cambiar el estado del tema.
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
   };
 
-  // useEffect se ejecuta cada vez que 'isDarkMode' cambia, aplicando la clase al body.
+  // Sincroniza el switch con el tema que ya estaba aplicado antes de hidratar.
+  useEffect(() => {
+    setIsDarkMode(getThemeState());
+  }, []);
+
+  // Mantiene sincronizadas varias instancias del switch (desktop y mobile).
+  useEffect(() => {
+    const handleThemeChange = event => {
+      const next = event?.detail?.isDarkMode;
+      if (typeof next === 'boolean') {
+        setIsDarkMode(next);
+      }
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => {
+      window.removeEventListener('theme-change', handleThemeChange);
+    };
+  }, []);
+
+  // Aplica clase global y persistencia cada vez que cambia el tema.
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -20,6 +56,8 @@ export default function BotonReact() {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+
+    window.dispatchEvent(new CustomEvent('theme-change', { detail: { isDarkMode } }));
   }, [isDarkMode]);
 
   return (
@@ -41,7 +79,7 @@ export default function BotonReact() {
       <button
         type="button"
         onClick={toggleTheme}
-        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${
+        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${
           isDarkMode ? 'bg-indigo-600' : 'bg-gray-200'
         }`}
         aria-pressed={isDarkMode}

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import '../styles/style.css';
+import 'aos/dist/aos.css';
 ---
 
 <html lang="es">
@@ -16,11 +17,426 @@ import '../styles/style.css';
         }
     </script>
 </head>
+
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">  
     <Header />
-    <main class="pt-20 px-8">
-        <h1 class="text-4xl font-bold">Pagina de Inicio</h1>
-        <p class="mt-4">Este es el contenido de la página principal donde podrás ver el header fijo funcionando.</p>
+    <main class="min-h-screen">
+        <div class="pt-40 px-8 flex flex-col items-center justify-center gap-8 md:flex-row md:items-center md:justify-center">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF74LYvpj_Icw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1671481234251?e=2147483647&v=beta&t=aLwApL4BtBDskJflqn5ak_d-ANpgGWUX3OyiCbqY1g4" alt="fotoperfil" class="rounded-full w-48 h-48 mb-2 md:mb-0">
+            <div class="flex flex-col items-center md:items-start">
+                <h1 class="text-4xl font-bold reveal reveal-1">Hola!</h1>
+                <div class="text-4xl font-bold inline-flex items-baseline gap-2 mt-1 reveal reveal-2">
+                    <span>Soy</span>
+                    <span class="type-highlight">
+                        <span class="typewriter-word">sinccs</span>
+                    </span>
+                </div>
+                <h2 class="text-xl font-light opacity-60 mt-2 reveal reveal-3">o Juan Manuel Pizarro</h2>
+            </div>
+        </div>
+
+        <div class="relative bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-colors duration-300 mt-8 mx-auto w-[calc(100%-2rem)] max-w-3xl rounded-xl" data-aos="fade-down" data-aos-duration="750" data-aos-offset="120">
+            <div class="absolute left-1/2 -translate-x-1/2 -top-4 w-0 h-0 border-l-16 border-r-16 border-b-16 border-l-transparent border-r-transparent border-b-gray-200 dark:border-b-gray-700"></div>
+            <div class="container mx-auto py-10 px-6 md:px-14 lg:px-14 mt-10">
+                <div class="text-center md:text-left max-w-3xl mx-auto" data-aos="fade-down" data-aos-delay="120" data-aos-duration="750">
+                    <p class="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0" id="perfil-texto">
+                        Soy <b>Licenciado en Diseño Multimedial y de Interacción</b> con experiencia en programación front-end utilizando tecnologías como HTML, CSS, JavaScript, React y Node.js. Me apasiona crear productos digitales atractivos y funcionales ligados a la experiencia de usuario.
+                    </p>
+                    <div id="perfil-texto-extra-wrap" class="overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-out">
+                        <p id="perfil-texto-extra" class="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0 mt-2">
+                            Además de comprender herramientas de diseño gráfico y editorial, también soy animador motion graphics y en modelados 3D. Siempre estoy buscando aprender nuevas tecnologías y mejorar mis habilidades para ofrecer soluciones innovadoras.
+                        </p>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="perfil-toggle" type="button" aria-expanded="false" aria-controls="perfil-texto-extra" class="rounded-md px-4 py-2 text-sm font-semibold bg-gray-800 text-gray-100 hover:bg-gray-900 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200 transition-colors duration-200">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-6 mx-auto w-[calc(100%-2rem)] max-w-3xl" data-aos="fade-down" data-aos-duration="800" data-aos-offset="120">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="rounded-lg bg-gray-100 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 p-2.5 md:p-3">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 class="text-base md:text-lg font-bold tracking-tight">Audiovisuales</h3>
+                        <button
+                            id="audiovisuales-next"
+                            type="button"
+                            aria-label="Mostrar siguientes videos"
+                            class="h-7 w-7 inline-flex items-center justify-center rounded-full bg-gray-800 text-white dark:bg-gray-100 dark:text-gray-900 hover:scale-105 transition-transform duration-300"
+                        >
+                            <span class="text-xs font-bold">&gt;</span>
+                        </button>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <div id="audiovisuales-slides" class="flex transition-transform duration-700 ease-out">
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://www.youtube.com/embed/bXlxVMXivwA"
+                                        title="Video audiovisual 1"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://www.youtube.com/embed/N7x-AM5EzXM"
+                                        title="Video audiovisual 2"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://www.youtube.com/embed/PTaghQgtRJo"
+                                        title="Video audiovisual 3"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1zJkV8AiE2QHDydE20wIhr5rm16-lSHML/preview"
+                                        title="Video audiovisual 4"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Btry Rooster eSports</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1nhleH9Q9ghlRe3s5MJgS-dmAyBxf31JG/preview"
+                                        title="Video audiovisual 5"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Btry Intro eSports</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/17CNnWh2xGTdfIXkIJm5fuaHdTOb8YFCS/preview"
+                                        title="Video audiovisual 6"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Ztuiti Intro Logo</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/17n6J5RcCdB7sOJPLgvGFnNhLdlc04wm-/preview"
+                                        title="Video audiovisual 7"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Publicidad Cardz</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1xyEAD6LMZd6BneYfjIbGXChBub9N0J62/preview"
+                                        title="Video audiovisual 8"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Publicidad Modelismo</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1DxTIG8QAYW9UvSdNt1e1Ca-woEQTE5rm/preview"
+                                        title="Video audiovisual 9"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Instructivo HeaderSolution</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1iB9tJslf6Z09ASxUB9TnJIKpFUdYYAs3/preview"
+                                        title="Video audiovisual 10"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Publicidad MatePatrio</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://www.youtube.com/embed/DhKBHcp3HPo"
+                                        title="Video audiovisual 11"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-lg bg-gray-100 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 p-2.5 md:p-3">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 class="text-base md:text-lg font-bold tracking-tight">Documentos</h3>
+                        <button
+                            id="audiovisuales-next-2"
+                            type="button"
+                            aria-label="Mostrar siguientes videos"
+                            class="h-7 w-7 inline-flex items-center justify-center rounded-full bg-gray-800 text-white dark:bg-gray-100 dark:text-gray-900 hover:scale-105 transition-transform duration-300"
+                        >
+                            <span class="text-xs font-bold">&gt;</span>
+                        </button>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <div id="audiovisuales-slides-2" class="flex transition-transform duration-700 ease-out">
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1-9kKG5YMVLZd-kV9W9K2KGkpgtyHjrmY/preview"
+                                        title="Documento 1"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Manual de Marca | Fleet Solutions</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1Qf1NeJ2bheeveb8rJMlz-gi_wBU0x7hH/preview"
+                                        title="Documento 2"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Mockups | Fleet Solutions</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1aSJWd9aLv8BhSatK7egX9duw0H6NAiaA/preview"
+                                        title="Documento 3"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Presskit | Abbasi Horizontal</span>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1I_0GmsQuopjW8Ihgs7IaNj5l70jGAdh3/preview"
+                                        title="Documento 4"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                                <span class="block px-2 py-1 text-xs font-medium text-gray-100 bg-black/80">Presskit | Abbasi Vertical</span>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-lg bg-gray-100 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 p-2.5 md:p-3 md:col-span-2 md:max-w-md md:mx-auto w-full">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 class="text-base md:text-lg font-bold tracking-tight">Varios</h3>
+                        <button
+                            id="audiovisuales-next-3"
+                            type="button"
+                            aria-label="Mostrar siguientes archivos"
+                            class="h-7 w-7 inline-flex items-center justify-center rounded-full bg-gray-800 text-white dark:bg-gray-100 dark:text-gray-900 hover:scale-105 transition-transform duration-300"
+                        >
+                            <span class="text-xs font-bold">&gt;</span>
+                        </button>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <div id="audiovisuales-slides-3" class="flex transition-transform duration-700 ease-out">
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/100ziJBYQiV2g2bH5weA7Gv_hZbx4N6ry/preview"
+                                        title="Varios 1"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1jhgdo9HTfuFP0gO9IvE08gmh32TidqGj/preview"
+                                        title="Varios 2"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1wRreNc2a9x-RcGZMzuFq0eMISclO--4f/preview"
+                                        title="Varios 3"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1s2zucmJ7av1tOY66Vt24nd4YrIwhlAeO/preview"
+                                        title="Varios 4"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                            </article>
+
+                            <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                                <div class="aspect-16/13">
+                                    <iframe
+                                        class="w-full h-full"
+                                        src="https://drive.google.com/file/d/1v1hX6pBLHyL6b_O0T0r6hx7DVkOvXUaJ/preview"
+                                        title="Varios 5"
+                                        loading="lazy"
+                                        allow="autoplay"
+                                    ></iframe>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <script>
+        import AOS from 'aos';
+
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 700,
+            easing: 'ease-out-cubic'
+        });
+
+        const perfilToggle = document.getElementById('perfil-toggle');
+        const perfilTextoExtraWrap = document.getElementById('perfil-texto-extra-wrap');
+        const perfilTextoExtra = document.getElementById('perfil-texto-extra');
+
+        if (perfilToggle && perfilTextoExtra && perfilTextoExtraWrap) {
+            perfilToggle.addEventListener('click', () => {
+                const expanded = perfilToggle.getAttribute('aria-expanded') === 'true';
+
+                if (expanded) {
+                    perfilTextoExtraWrap.style.maxHeight = `${perfilTextoExtraWrap.scrollHeight}px`;
+
+                    requestAnimationFrame(() => {
+                        perfilTextoExtraWrap.style.maxHeight = '0px';
+                        perfilTextoExtraWrap.classList.remove('opacity-100');
+                        perfilTextoExtraWrap.classList.add('opacity-0');
+                    });
+                } else {
+                    perfilTextoExtraWrap.style.maxHeight = `${perfilTextoExtra.scrollHeight}px`;
+                    perfilTextoExtraWrap.classList.remove('opacity-0');
+                    perfilTextoExtraWrap.classList.add('opacity-100');
+                }
+
+                perfilToggle.setAttribute('aria-expanded', String(!expanded));
+                perfilToggle.textContent = expanded ? 'Ver más' : 'Ver menos';
+            });
+        }
+
+        const initAudiovisualesSlider = (slidesId: string, nextId: string, totalSlides: number) => {
+            const slides = document.getElementById(slidesId);
+            const next = document.getElementById(nextId);
+            let index = 0;
+
+            const update = () => {
+                if (!slides || !next) {
+                    return;
+                }
+
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                next.setAttribute('aria-label', 'Mostrar siguiente video');
+            };
+
+            if (slides && next) {
+                update();
+                next.addEventListener('click', () => {
+                    index = (index + 1) % totalSlides;
+                    update();
+                });
+            }
+        };
+
+        initAudiovisualesSlider('audiovisuales-slides', 'audiovisuales-next', 11);
+        initAudiovisualesSlider('audiovisuales-slides-2', 'audiovisuales-next-2', 4);
+        initAudiovisualesSlider('audiovisuales-slides-3', 'audiovisuales-next-3', 5);
+
+    </script>
 </body> 
 </html>

@@ -3,8 +3,116 @@
 /* Esto fuerza a Tailwind a usar la clase .dark para activar el modo oscuro */
 @variant dark (&:where(.dark, .dark *));
 
+/* Importar fuente Gotham */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/gotham-regular.woff2') format('woff2'),
+       url('/fonts/gotham-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/gotham-bold.woff2') format('woff2'),
+       url('/fonts/gotham-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* Estilos globales personalizados */
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Gotham', system-ui, -apple-system, sans-serif;
   /* El color de fondo ya lo estamos manejando con Tailwind (bg-gray-50) en el HTML, pero puedes sobreescribirlo aquí */
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fade-in-up 0.65s ease-out forwards;
+}
+
+.reveal-1 {
+  animation-delay: 0.1s;
+}
+
+.reveal-2 {
+  animation-delay: 0.45s;
+}
+
+.reveal-3 {
+  animation-delay: 1.8s;
+}
+
+.type-highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.type-highlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #facc15;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: highlight-grow 1.2s ease-out 0.75s forwards;
+  z-index: -1;
+}
+
+.typewriter-word {
+  display: inline-block;
+  white-space: nowrap;
+  color: #111827;
+  clip-path: inset(0 100% 0 0);
+  animation: type-word 1.2s steps(6, end) 0.75s forwards;
+}
+
+.dark .typewriter-word {
+  color: #111827;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes type-word {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes highlight-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.respect-reduced-motion .reveal,
+  html.respect-reduced-motion .typewriter-word,
+  html.respect-reduced-motion .type-highlight::before {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+
+  html.respect-reduced-motion .type-highlight::before {
+    transform: scaleX(1);
+  }
 }

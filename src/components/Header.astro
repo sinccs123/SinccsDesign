@@ -8,7 +8,7 @@ const navLinks = [
     { name: 'Porfolio', href: '/portfolio' }, // Cambiado a una ruta real para demostración
 ];
 ---
-<header class="fixed top-0 left-0 w-full bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm shadow-sm z-50 transition-colors duration-300">
+<header class="fixed top-0 left-0 w-full bg-white/45 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm z-50 transition-colors duration-300 border-b border-white/20 dark:border-slate-700/40" style="backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);">
     <nav class="mx-auto flex max-w-8xl items-center justify-between p-4 lg:px-8">
         <div class="flex items-center gap-4">
             <a href="/" class="-m-1.5 p-1.5">
@@ -32,7 +32,7 @@ const navLinks = [
                     </li>
                 ))}
             </ul>
-            <BotonReact client:load />
+            <BotonReact client:only="react" />
         </div>
 
         <!-- Mobile Menu Button (Hamburger) -->
@@ -58,7 +58,7 @@ const navLinks = [
                 </a>
                 <div class="flex items-center gap-x-6">
                     <div class="py-6 flex">
-                        <BotonReact client:load />
+                        <BotonReact client:only="react" />
                     </div>
                     <button id="close-mobile-menu-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300">
                         <span class="sr-only">Close menu</span>

@@ -22,7 +22,7 @@ import 'aos/dist/aos.css';
     <Header />
     <main class="min-h-screen">
         <div class="pt-40 px-8 flex flex-col items-center justify-center gap-8 md:flex-row md:items-center md:justify-center">
-            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF74LYvpj_Icw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1671481234251?e=2147483647&v=beta&t=aLwApL4BtBDskJflqn5ak_d-ANpgGWUX3OyiCbqY1g4" alt="fotoperfil" class="rounded-full w-48 h-48 mb-2 md:mb-0">
+            <img src="https://res.cloudinary.com/du83pwamg/image/upload/v1782918542/WhatsApp_Image_2026-07-01_at_11.05.25_AM_asup8x.jpg" alt="fotoperfil" class="rounded-full w-48 h-48 mb-2 md:mb-0">
             <div class="flex flex-col items-center md:items-start">
                 <h1 class="text-4xl font-bold reveal reveal-1">Hola!</h1>
                 <div class="text-4xl font-bold inline-flex items-baseline gap-2 mt-1 reveal reveal-2">
@@ -39,11 +39,11 @@ import 'aos/dist/aos.css';
             <div class="absolute left-1/2 -translate-x-1/2 -top-4 w-0 h-0 border-l-16 border-r-16 border-b-16 border-l-transparent border-r-transparent border-b-gray-100 dark:border-b-gray-800/50"></div>
             <div class="container mx-auto py-10 px-6 md:px-14 lg:px-14 mt-10">
                 <div class="text-center md:text-left max-w-3xl mx-auto" data-aos="fade-down" data-aos-delay="120" data-aos-duration="750">
-                    <p class="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0" id="perfil-texto">
+                    <p class="text-lg leading-relaxed pb-1 max-w-3xl mx-auto md:mx-0" id="perfil-texto">
                         Soy <b>Licenciado en Diseño Multimedial y de Interacción</b> con experiencia en programación front-end utilizando tecnologías como HTML, CSS, JavaScript, React y Node.js. Me apasiona crear productos digitales atractivos y funcionales ligados a la experiencia de usuario.
                     </p>
                     <div id="perfil-texto-extra-wrap" class="overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-out">
-                        <p id="perfil-texto-extra" class="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0 mt-2">
+                        <p id="perfil-texto-extra" class="text-lg leading-relaxed pb-1 max-w-3xl mx-auto md:mx-0 mt-2">
                             Además de comprender herramientas de diseño gráfico y editorial, también soy animador motion graphics y en modelados 3D. Siempre estoy buscando aprender nuevas tecnologías y mejorar mis habilidades para ofrecer soluciones innovadoras.
                         </p>
                     </div>
@@ -69,7 +69,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden [touch-action:pan-y]">
+                    <div class="overflow-hidden">
                         <div id="audiovisuales-slides" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -234,7 +234,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden [touch-action:pan-y]">
+                    <div class="overflow-hidden">
                         <div id="audiovisuales-slides-2" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -304,7 +304,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden [touch-action:pan-y]">
+                    <div class="overflow-hidden">
                         <div id="audiovisuales-slides-3" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -413,11 +413,7 @@ import 'aos/dist/aos.css';
         const initAudiovisualesSlider = (slidesId: string, nextId: string, totalSlides: number) => {
             const slides = document.getElementById(slidesId);
             const next = document.getElementById(nextId);
-            const swipeSurface = slides?.parentElement;
             let index = 0;
-            let startX = 0;
-            let startY = 0;
-            const swipeThreshold = 45;
 
             const update = () => {
                 if (!slides || !next) {
@@ -428,68 +424,12 @@ import 'aos/dist/aos.css';
                 next.setAttribute('aria-label', 'Mostrar siguiente video');
             };
 
-            const goNext = () => {
-                index = (index + 1) % totalSlides;
-                update();
-            };
-
-            const goPrev = () => {
-                index = (index - 1 + totalSlides) % totalSlides;
-                update();
-            };
-
-            const handleGesture = (endX: number, endY: number) => {
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-
-                if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                    return;
-                }
-
-                if (Math.abs(deltaX) < swipeThreshold) {
-                    return;
-                }
-
-                if (deltaX < 0) {
-                    goNext();
-                } else {
-                    goPrev();
-                }
-            };
-
-            if (slides && next && swipeSurface) {
+            if (slides && next) {
                 update();
                 next.addEventListener('click', () => {
-                    goNext();
+                    index = (index + 1) % totalSlides;
+                    update();
                 });
-
-                swipeSurface.addEventListener('pointerdown', (event) => {
-                    if (event.pointerType !== 'touch') {
-                        return;
-                    }
-
-                    startX = event.clientX;
-                    startY = event.clientY;
-                }, { passive: true });
-
-                swipeSurface.addEventListener('pointerup', (event) => {
-                    if (event.pointerType !== 'touch') {
-                        return;
-                    }
-
-                    handleGesture(event.clientX, event.clientY);
-                }, { passive: true });
-
-                swipeSurface.addEventListener('touchstart', (event) => {
-                    const touch = event.changedTouches[0];
-                    startX = touch.clientX;
-                    startY = touch.clientY;
-                }, { passive: true });
-
-                swipeSurface.addEventListener('touchend', (event) => {
-                    const touch = event.changedTouches[0];
-                    handleGesture(touch.clientX, touch.clientY);
-                }, { passive: true });
             }
         };
 

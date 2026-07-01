@@ -35,8 +35,8 @@ import 'aos/dist/aos.css';
             </div>
         </div>
 
-        <div class="relative bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-colors duration-300 mt-8 mx-auto w-[calc(100%-2rem)] max-w-3xl rounded-xl" data-aos="fade-down" data-aos-duration="750" data-aos-offset="120">
-            <div class="absolute left-1/2 -translate-x-1/2 -top-4 w-0 h-0 border-l-16 border-r-16 border-b-16 border-l-transparent border-r-transparent border-b-gray-200 dark:border-b-gray-700"></div>
+        <div class="relative bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300 mt-8 mx-auto w-[calc(100%-2rem)] max-w-3xl rounded-xl" data-aos="fade-down" data-aos-duration="750" data-aos-offset="120">
+            <div class="absolute left-1/2 -translate-x-1/2 -top-4 w-0 h-0 border-l-16 border-r-16 border-b-16 border-l-transparent border-r-transparent border-b-gray-100 dark:border-b-gray-800"></div>
             <div class="container mx-auto py-10 px-6 md:px-14 lg:px-14 mt-10">
                 <div class="text-center md:text-left max-w-3xl mx-auto" data-aos="fade-down" data-aos-delay="120" data-aos-duration="750">
                     <p class="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0" id="perfil-texto">
@@ -414,6 +414,19 @@ import 'aos/dist/aos.css';
             const slides = document.getElementById(slidesId);
             const next = document.getElementById(nextId);
             let index = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const swipeThreshold = 45;
+
+            const goToNext = () => {
+                index = (index + 1) % totalSlides;
+                update();
+            };
+
+            const goToPrev = () => {
+                index = (index - 1 + totalSlides) % totalSlides;
+                update();
+            };
 
             const update = () => {
                 if (!slides || !next) {
@@ -427,9 +440,27 @@ import 'aos/dist/aos.css';
             if (slides && next) {
                 update();
                 next.addEventListener('click', () => {
-                    index = (index + 1) % totalSlides;
-                    update();
+                    goToNext();
                 });
+
+                slides.addEventListener('touchstart', (event) => {
+                    touchStartX = event.changedTouches[0].clientX;
+                }, { passive: true });
+
+                slides.addEventListener('touchend', (event) => {
+                    touchEndX = event.changedTouches[0].clientX;
+                    const deltaX = touchEndX - touchStartX;
+
+                    if (Math.abs(deltaX) < swipeThreshold) {
+                        return;
+                    }
+
+                    if (deltaX < 0) {
+                        goToNext();
+                    } else {
+                        goToPrev();
+                    }
+                }, { passive: true });
             }
         };
 

@@ -69,7 +69,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden">
+                    <div class="overflow-hidden [touch-action:pan-y]">
                         <div id="audiovisuales-slides" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -234,7 +234,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden">
+                    <div class="overflow-hidden [touch-action:pan-y]">
                         <div id="audiovisuales-slides-2" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -304,7 +304,7 @@ import 'aos/dist/aos.css';
                         </button>
                     </div>
 
-                    <div class="overflow-hidden">
+                    <div class="overflow-hidden [touch-action:pan-y]">
                         <div id="audiovisuales-slides-3" class="flex transition-transform duration-700 ease-out">
                             <article class="min-w-full rounded-lg overflow-hidden bg-black shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                                 <div class="aspect-16/13">
@@ -413,9 +413,12 @@ import 'aos/dist/aos.css';
         const initAudiovisualesSlider = (slidesId: string, nextId: string, totalSlides: number) => {
             const slides = document.getElementById(slidesId);
             const next = document.getElementById(nextId);
+            const swipeSurface = slides?.parentElement;
             let index = 0;
             let touchStartX = 0;
             let touchEndX = 0;
+            let touchStartY = 0;
+            let touchEndY = 0;
             const swipeThreshold = 45;
 
             const goToNext = () => {
@@ -437,19 +440,27 @@ import 'aos/dist/aos.css';
                 next.setAttribute('aria-label', 'Mostrar siguiente video');
             };
 
-            if (slides && next) {
+            if (slides && next && swipeSurface) {
                 update();
                 next.addEventListener('click', () => {
                     goToNext();
                 });
 
-                slides.addEventListener('touchstart', (event) => {
+                swipeSurface.addEventListener('touchstart', (event) => {
                     touchStartX = event.changedTouches[0].clientX;
+                    touchStartY = event.changedTouches[0].clientY;
                 }, { passive: true });
 
-                slides.addEventListener('touchend', (event) => {
+                swipeSurface.addEventListener('touchend', (event) => {
                     touchEndX = event.changedTouches[0].clientX;
+                    touchEndY = event.changedTouches[0].clientY;
                     const deltaX = touchEndX - touchStartX;
+                    const deltaY = touchEndY - touchStartY;
+
+                    // Ignora gestos mayormente verticales para no interferir con scroll.
+                    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                        return;
+                    }
 
                     if (Math.abs(deltaX) < swipeThreshold) {
                         return;

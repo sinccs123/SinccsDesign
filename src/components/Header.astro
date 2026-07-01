@@ -5,7 +5,7 @@ const { pathname } = Astro.url;
 
 const navLinks = [
     { name: 'Sobre mi', href: '/' },
-    { name: 'Porfolio', href: '/portfolio' }, // Cambiado a una ruta real para demostración
+    { name: 'Contacto', href: '/contacto' }, // Cambiado a una ruta real para demostración
 ];
 ---
 <header class="fixed top-0 left-0 w-full bg-white/45 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm z-50 transition-colors duration-300 border-b border-white/20 dark:border-slate-700/40" style="backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);">
@@ -36,7 +36,8 @@ const navLinks = [
         </div>
 
         <!-- Mobile Menu Button (Hamburger) -->
-        <div class="flex md:hidden">
+        <div class="flex md:hidden items-center gap-2">
+            <BotonReact client:only="react" />
             <button id="mobile-menu-button" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300">
                 <span class="sr-only">Open main menu</span>
                 <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
